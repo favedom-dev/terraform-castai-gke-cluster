@@ -38,7 +38,7 @@ variable "gke_cluster_region" {
 }
 
 variable "gke_credentials" {
-  type = string
+  type        = string
   description = "Optional GCP Service account credentials.json"
 }
 

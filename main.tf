@@ -8,12 +8,12 @@ resource "castai_gke_cluster" "castai_cluster" {
 }
 
 resource "helm_release" "castai_agent" {
-  name            = "castai-agent"
-  repository      = "https://castai.github.io/helm-charts"
-  chart           = "castai-agent"
-  namespace       = "castai-agent"
+  name             = "castai-agent"
+  repository       = "https://castai.github.io/helm-charts"
+  chart            = "castai-agent"
+  namespace        = "castai-agent"
   create_namespace = true
-  cleanup_on_fail = true
+  cleanup_on_fail  = true
 
   set {
     name  = "provider"
@@ -21,7 +21,7 @@ resource "helm_release" "castai_agent" {
   }
 
   set {
-    name = "createNamespace"
+    name  = "createNamespace"
     value = "false"
   }
 
@@ -40,12 +40,12 @@ resource "helm_release" "castai_agent" {
 }
 
 resource "helm_release" "castai_cluster_controller" {
-  name            = "cluster-controller"
-  repository      = "https://castai.github.io/helm-charts"
-  chart           = "castai-cluster-controller"
-  namespace       = "castai-agent"
+  name             = "cluster-controller"
+  repository       = "https://castai.github.io/helm-charts"
+  chart            = "castai-cluster-controller"
+  namespace        = "castai-agent"
   create_namespace = true
-  cleanup_on_fail = true
+  cleanup_on_fail  = true
 
   set {
     name  = "castai.clusterID"
