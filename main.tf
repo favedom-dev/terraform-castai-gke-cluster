@@ -39,6 +39,22 @@ resource "helm_release" "castai_agent" {
   }
 }
 
+resource "helm_release" "castai_evictor" {
+  name            = "cluster-evictor"
+  repository      = "https://castai.github.io/helm-charts"
+  chart           = "castai-evictor"
+  namespace       = "castai-agent"
+  create_namespace = true
+  cleanup_on_fail = true
+
+  set {
+    name  = "replicaCount"
+    value = "0"
+  }
+
+  depends_on = [helm_release.castai_agent]
+}
+
 resource "helm_release" "castai_cluster_controller" {
   name             = "cluster-controller"
   repository       = "https://castai.github.io/helm-charts"
