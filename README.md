@@ -28,7 +28,7 @@ module "castai_gke_cluster" {
   
   project_id = var.project_id
   gke_cluster_name = var.cluster_name
-  gke_cluster_region = var.cluster_region
+  gke_cluster_location = module.gke.location # cluster region or zone  
 
   gke_credentials = module.castai_gke_iam.private_key
   delete_nodes_on_disconnect = var.delete_nodes_on_disconnect
@@ -37,6 +37,7 @@ module "castai_gke_cluster" {
 }
 ```
 
+[Example usage](https://github.com/castai/terraform-provider-castai/blob/master/examples/gke_cluster/main.tf)
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -67,6 +68,7 @@ No modules.
 | [castai_gke_cluster.castai_cluster](https://registry.terraform.io/providers/castai/castai/latest/docs/resources/gke_cluster) | resource |
 | [helm_release.castai_agent](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 | [helm_release.castai_cluster_controller](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
+| [helm_release.castai_evictor](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
 
 ## Inputs
 
@@ -75,8 +77,8 @@ No modules.
 | <a name="input_api_url"></a> [api\_url](#input\_api\_url) | URL of alternative CAST AI API to be used during development or testing | `string` | `"https://api.cast.ai"` | no |
 | <a name="input_autoscaler_policies_json"></a> [autoscaler\_policies\_json](#input\_autoscaler\_policies\_json) | Optional json object to override CAST AI cluster autoscaler policies | `string` | `""` | no |
 | <a name="input_delete_nodes_on_disconnect"></a> [delete\_nodes\_on\_disconnect](#input\_delete\_nodes\_on\_disconnect) | Optionally delete Cast AI created nodes when the cluster is destroyed | `bool` | `false` | no |
+| <a name="input_gke_cluster_location"></a> [gke\_cluster\_location](#input\_gke\_cluster\_location) | Location of the cluster to be connected to CAST AI. Can be region or zone for zonal clusters | `string` | n/a | yes |
 | <a name="input_gke_cluster_name"></a> [gke\_cluster\_name](#input\_gke\_cluster\_name) | Name of the cluster to be connected to CAST AI. | `string` | n/a | yes |
-| <a name="input_gke_cluster_region"></a> [gke\_cluster\_region](#input\_gke\_cluster\_region) | Region of the cluster to be connected to CAST AI. | `string` | n/a | yes |
 | <a name="input_gke_credentials"></a> [gke\_credentials](#input\_gke\_credentials) | Optional GCP Service account credentials.json | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The project id from GCP | `string` | n/a | yes |
 | <a name="input_ssh_public_key"></a> [ssh\_public\_key](#input\_ssh\_public\_key) | Optional SSH public key for VM instances. Accepted values are base64 encoded SSH public key or AWS key pair ID | `string` | `null` | no |

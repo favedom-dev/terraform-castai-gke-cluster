@@ -1,6 +1,6 @@
 resource "castai_gke_cluster" "castai_cluster" {
   project_id                 = var.project_id
-  region                     = var.gke_cluster_region
+  location                   = var.gke_cluster_location
   name                       = var.gke_cluster_name
   ssh_public_key             = var.ssh_public_key
   delete_nodes_on_disconnect = var.delete_nodes_on_disconnect
@@ -40,12 +40,12 @@ resource "helm_release" "castai_agent" {
 }
 
 resource "helm_release" "castai_evictor" {
-  name            = "cluster-evictor"
-  repository      = "https://castai.github.io/helm-charts"
-  chart           = "castai-evictor"
-  namespace       = "castai-agent"
+  name             = "cluster-evictor"
+  repository       = "https://castai.github.io/helm-charts"
+  chart            = "castai-evictor"
+  namespace        = "castai-agent"
   create_namespace = true
-  cleanup_on_fail = true
+  cleanup_on_fail  = true
 
   set {
     name  = "replicaCount"
