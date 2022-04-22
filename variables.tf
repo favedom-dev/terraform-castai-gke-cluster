@@ -32,9 +32,10 @@ variable "ssh_public_key" {
   default     = null
 }
 
-variable "gke_cluster_region" {
+variable "gke_cluster_location" {
   type        = string
-  description = "Region of the cluster to be connected to CAST AI."
+  description = "Location of the cluster to be connected to CAST AI. Can be region or zone for zonal clusters"
+
 }
 
 variable "gke_credentials" {
