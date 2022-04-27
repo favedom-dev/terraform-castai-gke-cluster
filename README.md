@@ -45,7 +45,7 @@ module "castai_gke_cluster" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_castai"></a> [castai](#requirement\_castai) | >= 0.16.0 |
+| <a name="requirement_castai"></a> [castai](#requirement\_castai) | >= 0.18.0 |
 | <a name="requirement_google"></a> [google](#requirement\_google) | >= 2.49 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | >=2.0.0 |
 
@@ -53,7 +53,7 @@ module "castai_gke_cluster" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_castai"></a> [castai](#provider\_castai) | >= 0.16.0 |
+| <a name="provider_castai"></a> [castai](#provider\_castai) | >= 0.18.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | >=2.0.0 |
 
 ## Modules
@@ -85,5 +85,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | CAST.AI cluster id, which can be used for accessing cluster data using API |
 <!-- END_TF_DOCS -->
