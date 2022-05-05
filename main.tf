@@ -14,6 +14,7 @@ resource "helm_release" "castai_agent" {
   namespace        = "castai-agent"
   create_namespace = true
   cleanup_on_fail  = true
+  wait = true
 
   set {
     name  = "provider"
@@ -46,6 +47,7 @@ resource "helm_release" "castai_evictor" {
   namespace        = "castai-agent"
   create_namespace = true
   cleanup_on_fail  = true
+  wait = true
 
   set {
     name  = "replicaCount"
@@ -53,6 +55,10 @@ resource "helm_release" "castai_evictor" {
   }
 
   depends_on = [helm_release.castai_agent]
+
+  lifecycle {
+    ignore_changes = [set, version]
+  }
 }
 
 resource "helm_release" "castai_cluster_controller" {
@@ -62,6 +68,7 @@ resource "helm_release" "castai_cluster_controller" {
   namespace        = "castai-agent"
   create_namespace = true
   cleanup_on_fail  = true
+  wait = true
 
   set {
     name  = "castai.clusterID"
@@ -88,5 +95,5 @@ resource "castai_autoscaler" "castai_autoscaler_policies" {
   autoscaler_policies_json = var.autoscaler_policies_json
   cluster_id               = castai_gke_cluster.castai_cluster.id
 
-  depends_on = [helm_release.castai_agent]
+  depends_on = [helm_release.castai_agent, helm_release.castai_evictor]
 }
