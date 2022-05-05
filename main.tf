@@ -14,6 +14,7 @@ resource "helm_release" "castai_agent" {
   namespace        = "castai-agent"
   create_namespace = true
   cleanup_on_fail  = true
+  wait = true
 
   set {
     name  = "provider"
@@ -46,6 +47,7 @@ resource "helm_release" "castai_evictor" {
   namespace        = "castai-agent"
   create_namespace = true
   cleanup_on_fail  = true
+  wait = true
 
   set {
     name  = "replicaCount"
@@ -66,6 +68,7 @@ resource "helm_release" "castai_cluster_controller" {
   namespace        = "castai-agent"
   create_namespace = true
   cleanup_on_fail  = true
+  wait = true
 
   set {
     name  = "castai.clusterID"
