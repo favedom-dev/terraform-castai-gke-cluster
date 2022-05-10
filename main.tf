@@ -22,6 +22,11 @@ resource "helm_release" "castai_agent" {
   }
 
   set {
+    name = "additionalEnv.STATIC_CLUSTER_ID"
+    value = castai_gke_cluster.castai_cluster.id
+  }
+
+  set {
     name  = "createNamespace"
     value = "false"
   }
