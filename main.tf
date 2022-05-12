@@ -107,7 +107,7 @@ resource "helm_release" "castai_spot_handler" {
 
   set {
     name  = "castai.provider"
-    value = "gke"
+    value = "gcp"
   }
 
   set {
