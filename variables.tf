@@ -43,3 +43,8 @@ variable "gke_credentials" {
   description = "Optional GCP Service account credentials.json"
 }
 
+variable "castai_components_labels" {
+  type = map
+  description = "Optional additional Kubernetes labels for CAST AI pods"
+  default = {}
+}
