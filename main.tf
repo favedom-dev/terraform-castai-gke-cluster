@@ -39,6 +39,14 @@ resource "helm_release" "castai_agent" {
     }
   }
 
+  dynamic "set" {
+    for_each = var.castai_components_labels
+    content {
+      name  = "podLabels.${set.key}"
+      value = set.value
+    }
+  }
+
   set_sensitive {
     name  = "apiKey"
     value = castai_gke_cluster.castai_cluster.cluster_token
@@ -57,6 +65,14 @@ resource "helm_release" "castai_evictor" {
   set {
     name  = "replicaCount"
     value = "0"
+  }
+
+  dynamic "set" {
+    for_each = var.castai_components_labels
+    content {
+      name  = "podLabels.${set.key}"
+      value = set.value
+    }
   }
 
   depends_on = [helm_release.castai_agent]
@@ -93,6 +109,14 @@ resource "helm_release" "castai_cluster_controller" {
     value = castai_gke_cluster.castai_cluster.cluster_token
   }
 
+  dynamic "set" {
+    for_each = var.castai_components_labels
+    content {
+      name  = "podLabels.${set.key}"
+      value = set.value
+    }
+  }
+
   depends_on = [helm_release.castai_agent]
 }
 
@@ -126,6 +150,14 @@ resource "helm_release" "castai_spot_handler" {
   set {
     name  = "castai.clusterID"
     value = castai_gke_cluster.castai_cluster.id
+  }
+
+  dynamic "set" {
+    for_each = var.castai_components_labels
+    content {
+      name  = "podLabels.${set.key}"
+      value = set.value
+    }
   }
 
   depends_on = [helm_release.castai_agent]
