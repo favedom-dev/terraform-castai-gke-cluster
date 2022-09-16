@@ -1,5 +1,6 @@
 terraform {
   required_version = ">= 0.13"
+  experiments      = [module_variable_optional_attrs]
 
   required_providers {
     google = {
@@ -8,7 +9,7 @@ terraform {
     }
     castai = {
       source  = "castai/castai"
-      version = ">= 0.18.0"
+      version = ">= 0.26.3"
     }
     helm = {
       source  = "hashicorp/helm"
