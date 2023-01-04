@@ -226,3 +226,21 @@ resource "helm_release" "castai_sec_agent" {
     value = "gke"
   }
 }
+
+resource "helm_release" "castai_pod_node_lifecycle" {
+  name             = "castai-pod-node-lifecycle"
+  repository       = "https://castai.github.io/helm-charts"
+  chart            = "castai-pod-node-lifecylce"
+  namespace        = "castai-agent"
+  create_namespace = true
+  cleanup_on_fail  = true
+  wait             = true
+
+  values = var.pod_node_lifecycle_values
+
+  depends_on = [helm_release.castai_agent]
+
+  lifecycle {
+    ignore_changes = [version]
+  }
+}

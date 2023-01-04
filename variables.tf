@@ -89,3 +89,9 @@ variable "sec_agent_values" {
   type        = list(string)
   default     = []
 }
+
+variable "pod_node_lifecycle_values" {
+  description = "List of YAML formatted string values for pod-node-lifecycle helm chart"
+  type        = list(string)
+  default     = []
+}
