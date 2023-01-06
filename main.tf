@@ -226,7 +226,7 @@ resource "helm_release" "castai_pod_node_lifecycle" {
   name             = "castai-pod-node-lifecycle"
   repository       = "https://castai.github.io/helm-charts"
   chart            = "castai-pod-node-lifecycle"
-  namespace        = "castai-agent"
+  namespace        = "castai-pod-node-lifecycle"
   create_namespace = true
   cleanup_on_fail  = true
   wait             = true
