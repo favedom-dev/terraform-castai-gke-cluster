@@ -78,6 +78,11 @@ resource "helm_release" "castai_evictor" {
 
   values = var.evictor_values
 
+  set {
+    name  = "replicaCount"
+    value = "0"
+  }
+
   dynamic "set" {
     for_each = var.castai_components_labels
     content {
